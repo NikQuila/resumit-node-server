@@ -15,9 +15,9 @@ class PaymentService {
         unit_price: unit_price,
         email: email,
       },
-      payer_email: "test_user_7003325@testuser.com",
+      payer_email: email,
       payer: {
-        name: "El nombre del qlio",
+        name: "Nombre",
       },
       items: [
         {
@@ -30,11 +30,12 @@ class PaymentService {
         },
       ],
       back_urls: {
-        failure: "/localhost:3000/dashboard/payment/failure",
+        failure: "/resumit/payment/failure",
         pending: "/pending",
-        success: "/localhost:3000/dashboard/payment/success",
+        success: "/resumit/payment/success",
       },
-      notification_url: "https://a005-132-147-42-19.ngrok.io/notificacion",
+      notification_url:
+        "https://resumit-server-node.herokuapp.com/notificacion",
     };
 
     const payment = await axios.post(url, body, {
