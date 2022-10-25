@@ -24,8 +24,7 @@ class PaymentService {
         email: email,
         email_vendedor: email_vendedor,
         name_comprador: name_comprador,
-        title,
-        title,
+        title: title,
       },
       payer_email: email,
       payer: {
