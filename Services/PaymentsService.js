@@ -2,8 +2,16 @@ const axios = require("axios");
 
 class PaymentService {
   async createPayment(req) {
-    const { title, unit_price, uid, email, resumitId, resumitUserId } =
-      req.body;
+    const {
+      title,
+      unit_price,
+      uid,
+      email,
+      email_vendedor,
+      name_comprador,
+      resumitId,
+      resumitUserId,
+    } = req.body;
     console.log(req.body);
     const url = "https://api.mercadopago.com/checkout/preferences";
 
@@ -14,6 +22,10 @@ class PaymentService {
         resumitUserId: resumitUserId,
         unit_price: unit_price,
         email: email,
+        email_vendedor: email_vendedor,
+        name_comprador: name_comprador,
+        title,
+        title,
       },
       payer_email: email,
       payer: {

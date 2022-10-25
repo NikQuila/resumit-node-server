@@ -3,6 +3,8 @@ const {
   downloadedFileAndSaveInResumitFS,
 } = require("../Firebase/firebase.utils");
 
+const mandarMail = require("../mailgun/mailgun");
+
 const axios = require("axios");
 
 const PagarProducto = async (req, res) => {
@@ -20,14 +22,29 @@ const PagarProducto = async (req, res) => {
     );
     console.log(payment.data);
     console.log(payment.data.metadata);
-    const { uid, resumit_id, resumit_user_id, email, unit_price } =
-      payment.data.metadata;
+    const {
+      uid,
+      resumit_id,
+      resumit_user_id,
+      email,
+      unit_price,
+      email_vendedor,
+      name_comprador,
+      title,
+    } = payment.data.metadata;
     downloadedFileAndSaveInUserFS(uid, resumit_id);
     downloadedFileAndSaveInResumitFS(
       uid,
       email,
       resumit_id,
       resumit_user_id,
+      unit_price
+    );
+    await mandarMail(
+      process.env.KEY_MAILGUN,
+      email_vendedor,
+      name_comprador,
+      title,
       unit_price
     );
   }
