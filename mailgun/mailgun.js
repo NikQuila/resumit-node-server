@@ -15,7 +15,7 @@ const mandarMail = async (
       "Esperemos que nuestro compañero pueda aporta algo la próxima vez :(";
   }
   const DOMAIN = "mail.resumit.cl";
-  const mg = mailgun({ apiKey: key, domain: DOMAIN });
+  const mg = mailgun({ apiKey: process.env.KEY_MAILGUN, domain: DOMAIN });
   const data = {
     from: "Resumit <resumits@outlook.com>",
     to: mail,
