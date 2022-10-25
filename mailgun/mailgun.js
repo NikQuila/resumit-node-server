@@ -1,4 +1,6 @@
-const mailgun = require("mailgun.js");
+const Mailgun = require("mailgun.js");
+const formData = require("form-data");
+const mailgun = new Mailgun(formData);
 
 const mandarMail = async (
   key,
@@ -15,20 +17,25 @@ const mandarMail = async (
       "Esperemos que nuestro compañero pueda aporta algo la próxima vez :(";
   }
   const DOMAIN = "mail.resumit.cl";
-  const mg = mailgun({ apiKey: process.env.KEY_MAILGUN, domain: DOMAIN });
+  const mg = mailgun.client({ key: key, username: "Resumit" });
   const data = {
     from: "Resumit <resumits@outlook.com>",
     to: mail,
-    subject: "Hello",
+    subject: "Has recibido una Descarga",
     template: "resumitsend",
     "v:nombreComprador": nombreComprador,
     "v:nombreResumit": nombreResumit,
     "v:precioCompra": precioCompra,
-    "v:texto": texto,
+    // "v:texto": texto,
   };
-  mg.messages().send(data, function (error, body) {
-    console.log(body);
-  });
+  mg.messages
+    .create(DOMAIN, data)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 module.exports = mandarMail;

@@ -7,13 +7,13 @@ const mandarMail = require("../mailgun/mailgun");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  mandarMail(
-    process.env.KEY_MAILGUN,
-    "nicolaspirozzi@uc.cl",
-    "NikQuila",
-    "Resumit 2",
-    1500
-  );
+  // await mandarMail(
+  //   process.env.KEY_MAILGUN,
+  //   "nicopirozzi1@gmail.com",
+  //   "NikQuila",
+  //   "Resumit 2",
+  //   1500
+  // );
   return res.json({
     "/payment": "generates a payment link",
     "/subscription": "generates a subscription link",
