@@ -41,9 +41,9 @@ class PaymentService {
         },
       ],
       back_urls: {
-        failure: "/resumit/payment/failure",
+        failure: "/resumit.cl/payment/failure",
         pending: "/pending",
-        success: "/resumit/payment/success",
+        success: "/resumit.cl/payment/success",
       },
       notification_url:
         "https://resumit-server-node.herokuapp.com/notificacion",
