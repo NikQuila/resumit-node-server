@@ -27,6 +27,7 @@ const mandarMail = async (
     "v:texto": texto,
   };
   mg.messages().send(data, function (error, body) {
+    console.log("sip");
     console.log(body);
   });
 };
