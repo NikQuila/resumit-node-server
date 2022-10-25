@@ -8,8 +8,6 @@ const mandarMail = require("../mailgun/mailgun");
 const axios = require("axios");
 
 const PagarProducto = async (req, res) => {
-  console.log("aqui");
-  console.log(req.body);
   if (req.body.id) {
     const payment = await axios.get(
       `https://api.mercadopago.com/v1/payments/${req.body.data.id}`,
@@ -20,8 +18,6 @@ const PagarProducto = async (req, res) => {
         },
       }
     );
-    console.log(payment.data);
-    console.log(payment.data.metadata);
     const {
       uid,
       resumit_id,
@@ -32,13 +28,14 @@ const PagarProducto = async (req, res) => {
       name_comprador,
       title,
     } = payment.data.metadata;
+    const unit_with_taxes = unit_price * 0.77;
     downloadedFileAndSaveInUserFS(uid, resumit_id);
     downloadedFileAndSaveInResumitFS(
       uid,
       email,
       resumit_id,
       resumit_user_id,
-      unit_price
+      unit_with_taxes
     );
     await mandarMail(
       process.env.KEY_MAILGUN,
