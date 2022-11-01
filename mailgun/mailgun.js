@@ -25,8 +25,8 @@ const mandarMail = async (
     template: "resumitsend",
     "v:nombreComprador": nombreComprador,
     "v:nombreResumit": nombreResumit,
-    "v:precioCompra": precioCompra,
-    // "v:texto": texto,
+    "v:precioCompra": precioCompra.toString(),
+    "v:texto": texto,
   };
   mg.messages
     .create(DOMAIN, data)
