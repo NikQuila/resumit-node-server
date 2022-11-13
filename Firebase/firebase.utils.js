@@ -32,11 +32,11 @@ const downloadedFileAndSaveInUserFS = async (uid, resumitDownloadedId) => {
   // Cuando un Usuario descarga un archivo, se guarda en myDownloadedFiles y en el documento del resumit, agregar su descargar y agregarle 1 sus downloades
   const userDocRef = doc(db, "users", uid);
   const userSnapshot = await getDoc(userDocRef);
-
+  const downloadedAt = new Date();
   // eslint-disable-next-line prefer-const
   let { myDownloadedFiles } = userSnapshot.data();
 
-  myDownloadedFiles.push(resumitDownloadedId);
+  myDownloadedFiles.push({ resumitDownloadedId, downloadedAt });
 
   try {
     await updateDoc(userDocRef, {
