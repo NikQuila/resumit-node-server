@@ -33,10 +33,11 @@ const downloadedFileAndSaveInUserFS = async (uid, resumitDownloadedId) => {
   const userDocRef = doc(db, "users", uid);
   const userSnapshot = await getDoc(userDocRef);
   const downloadedAt = new Date();
+  const mostradoPopUp = false;
   // eslint-disable-next-line prefer-const
   let { myDownloadedFiles } = userSnapshot.data();
 
-  myDownloadedFiles.push({ resumitDownloadedId, downloadedAt });
+  myDownloadedFiles.push({ resumitDownloadedId, downloadedAt, mostradoPopUp });
 
   try {
     await updateDoc(userDocRef, {
