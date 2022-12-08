@@ -11,7 +11,7 @@ const mandarMail = async (
 ) => {
   let texto = "";
   if (precioCompra > 0) {
-    texto = "Hay que estar muy agradecido con nuestro compañero :)";
+    texto = "Hay que estar muy agradecido con nuestro compañero! :)";
   } else if (precioCompra === 0) {
     texto =
       "Esperemos que nuestro compañero pueda aporta algo la próxima vez :(";
