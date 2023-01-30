@@ -28,21 +28,36 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-const downloadedFileAndSaveInUserFS = async (uid, resumitDownloadedId) => {
+const downloadedFileAndSaveInUserFS = async (
+  uid,
+  resumitDownloadedId,
+  precioComprado
+) => {
   // Cuando un Usuario descarga un archivo, se guarda en myDownloadedFiles y en el documento del resumit, agregar su descargar y agregarle 1 sus downloades
   const userDocRef = doc(db, "users", uid);
   const userSnapshot = await getDoc(userDocRef);
   const downloadedAt = new Date();
   const mostradoPopUp = false;
   // eslint-disable-next-line prefer-const
-  let { myDownloadedFiles } = userSnapshot.data();
+  let { myDownloadedFiles, inARowNotPayingDownloads } = userSnapshot.data();
+
+  if (!inARowNotPayingDownloads) {
+    inARowNotPayingDownloads = 0;
+  }
+  if (precioComprado > 0) {
+    inARowNotPayingDownloads = 0;
+  } else {
+    inARowNotPayingDownloads += 1;
+  }
 
   myDownloadedFiles.push({ resumitDownloadedId, downloadedAt, mostradoPopUp });
 
   try {
     await updateDoc(userDocRef, {
       myDownloadedFiles,
+      inARowNotPayingDownloads,
     });
+    console.log("updates new things");
   } catch (error) {
     console.log("error creating user", error.mesagge);
   }

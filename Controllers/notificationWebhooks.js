@@ -30,7 +30,7 @@ const PagarProducto = async (req, res) => {
         title,
       } = payment.data.metadata;
       const unit_with_taxes = unit_price * 0.77;
-      downloadedFileAndSaveInUserFS(uid, resumit_id);
+      downloadedFileAndSaveInUserFS(uid, resumit_id, unit_price);
       downloadedFileAndSaveInResumitFS(
         uid,
         email,
