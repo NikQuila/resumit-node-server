@@ -1,6 +1,7 @@
 const {
   downloadedFileAndSaveInUserFS,
   downloadedFileAndSaveInResumitFS,
+  downloadFileAndSaveInResumiterFB,
 } = require("../Firebase/firebase.utils");
 
 const mandarMail = require("../mailgun/mailgun");
@@ -38,6 +39,7 @@ const PagarProducto = async (req, res) => {
         resumit_user_id,
         unit_with_taxes
       );
+      downloadFileAndSaveInResumiterFB(resumit_user_id, uid, email, unit_price);
       await mandarMail(
         process.env.KEY_MAILGUN,
         email_vendedor,

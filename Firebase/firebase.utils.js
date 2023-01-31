@@ -106,7 +106,48 @@ const downloadedFileAndSaveInResumitFS = async (
   return resumitDocRef;
 };
 
+const downloadFileAndSaveInResumiterFB = async (
+  uidResumiter,
+  uidAportador,
+  mailComprador,
+  precioComprado
+) => {
+  console.log("aqui en la wea");
+  const userDocRef = doc(db, "users", uidResumiter);
+  const userSnapshot = await getDoc(userDocRef);
+  let { aportadores } = userSnapshot.data();
+  if (!aportadores) {
+    aportadores = [];
+  }
+  console.log(aportadores);
+  // Buscar si existe ese aportador
+  const found = aportadores.findIndex(
+    (element) => element.uidAportador === uidAportador
+  );
+  if (found != -1) {
+    aportadores[found].totalAportada += precioComprado;
+  } else {
+    const dataPorAgregar = {
+      uidAportador: uidAportador,
+      mailComprador: mailComprador,
+      totalAportada: precioComprado,
+    };
+    aportadores.push(dataPorAgregar);
+  }
+  console.log(aportadores);
+
+  // Actualizar en FB al resumiter
+  try {
+    await updateDoc(userDocRef, {
+      aportadores: aportadores,
+    });
+  } catch (error) {
+    console.log("error updating aportadores", error.mesagge);
+  }
+};
+
 module.exports = {
   downloadedFileAndSaveInResumitFS,
   downloadedFileAndSaveInUserFS,
+  downloadFileAndSaveInResumiterFB,
 };
