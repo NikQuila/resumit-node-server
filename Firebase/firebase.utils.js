@@ -113,7 +113,6 @@ const downloadFileAndSaveInResumiterFB = async (
   precioComprado,
   nameComprador
 ) => {
-  console.log("aqui");
   const userDocRef = doc(db, "users", uidResumiter);
   const userSnapshot = await getDoc(userDocRef);
   let { aportadores } = userSnapshot.data();
