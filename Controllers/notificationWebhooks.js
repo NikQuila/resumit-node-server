@@ -39,7 +39,13 @@ const PagarProducto = async (req, res) => {
         resumit_user_id,
         unit_with_taxes
       );
-      downloadFileAndSaveInResumiterFB(resumit_user_id, uid, email, unit_price);
+      downloadFileAndSaveInResumiterFB(
+        resumit_user_id,
+        uid,
+        email,
+        unit_price,
+        name_comprador
+      );
       await mandarMail(
         process.env.KEY_MAILGUN,
         email_vendedor,

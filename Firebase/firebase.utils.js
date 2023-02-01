@@ -110,16 +110,15 @@ const downloadFileAndSaveInResumiterFB = async (
   uidResumiter,
   uidAportador,
   mailComprador,
-  precioComprado
+  precioComprado,
+  nameComprador
 ) => {
-  console.log("aqui en la wea");
   const userDocRef = doc(db, "users", uidResumiter);
   const userSnapshot = await getDoc(userDocRef);
   let { aportadores } = userSnapshot.data();
   if (!aportadores) {
     aportadores = [];
   }
-  console.log(aportadores);
   // Buscar si existe ese aportador
   const found = aportadores.findIndex(
     (element) => element.uidAportador === uidAportador
@@ -131,10 +130,10 @@ const downloadFileAndSaveInResumiterFB = async (
       uidAportador: uidAportador,
       mailComprador: mailComprador,
       totalAportada: precioComprado,
+      nameAportador: nameComprador,
     };
     aportadores.push(dataPorAgregar);
   }
-  console.log(aportadores);
 
   // Actualizar en FB al resumiter
   try {

@@ -21,7 +21,13 @@ const MailNotPayment = async (req, res) => {
   } = req.body;
   downloadedFileAndSaveInUserFS(uid, resumit_id, 0);
   downloadedFileAndSaveInResumitFS(uid, email, resumit_id, resumit_user_id, 0);
-  downloadFileAndSaveInResumiterFB(resumit_user_id, uid, email, 0);
+  downloadFileAndSaveInResumiterFB(
+    resumit_user_id,
+    uid,
+    email,
+    0,
+    name_comprador
+  );
   await mandarMail(
     process.env.KEY_MAILGUN,
     email_vendedor,
