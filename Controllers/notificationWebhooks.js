@@ -2,6 +2,7 @@ const {
   downloadedFileAndSaveInUserFS,
   downloadedFileAndSaveInResumitFS,
   downloadFileAndSaveInResumiterFB,
+  addToHistorialFB,
 } = require("../Firebase/firebase.utils");
 
 const mandarMail = require("../mailgun/mailgun");
