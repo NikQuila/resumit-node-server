@@ -11,6 +11,7 @@ const {
   updateDoc,
   deleteField,
   deleteDoc,
+  addDoc,
 } = require("firebase/firestore");
 
 // Your web app's Firebase configuration
@@ -146,8 +147,19 @@ const downloadFileAndSaveInResumiterFB = async (
   }
 };
 
+const addToHistorialFB = async (nameComprador, nameResumiter, invitado) => {
+  const docRef = await addDoc(collection(db, "historial"), {
+    nameComprador: nameComprador,
+    nameResumiter: nameResumiter,
+    invitado: invitado,
+    date: new Date(),
+  });
+  console.log(docRef.id);
+};
+
 module.exports = {
   downloadedFileAndSaveInResumitFS,
   downloadedFileAndSaveInUserFS,
   downloadFileAndSaveInResumiterFB,
+  addToHistorialFB,
 };

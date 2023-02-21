@@ -24,6 +24,7 @@ const PagarProducto = async (req, res) => {
         uid,
         resumit_id,
         resumit_user_id,
+        resumit_user_name,
         email,
         unit_price,
         email_vendedor,
@@ -46,6 +47,7 @@ const PagarProducto = async (req, res) => {
         unit_price,
         name_comprador
       );
+      addToHistorialFB(name_comprador, resumit_user_name, unit_price);
       await mandarMail(
         process.env.KEY_MAILGUN,
         email_vendedor,

@@ -2,6 +2,7 @@ const {
   downloadedFileAndSaveInUserFS,
   downloadedFileAndSaveInResumitFS,
   downloadFileAndSaveInResumiterFB,
+  addToHistorialFB,
 } = require("../Firebase/firebase.utils");
 
 const mandarMail = require("../mailgun/mailgun");
@@ -13,6 +14,7 @@ const MailNotPayment = async (req, res) => {
     uid,
     resumit_id,
     resumit_user_id,
+    resumit_user_name,
     email,
     unit_price,
     email_vendedor,
@@ -28,6 +30,7 @@ const MailNotPayment = async (req, res) => {
     0,
     name_comprador
   );
+  addToHistorialFB(name_comprador, resumit_user_name, false);
   await mandarMail(
     process.env.KEY_MAILGUN,
     email_vendedor,

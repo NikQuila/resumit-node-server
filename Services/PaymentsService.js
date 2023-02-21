@@ -11,6 +11,7 @@ class PaymentService {
       name_comprador,
       resumit_id,
       resumit_user_id,
+      resumit_user_name,
     } = req.body;
     console.log(req.body);
     const url = "https://api.mercadopago.com/checkout/preferences";
@@ -20,6 +21,7 @@ class PaymentService {
         uid: uid,
         resumit_id: resumit_id,
         resumit_user_id: resumit_user_id,
+        resumit_user_name: resumit_user_name,
         unit_price: unit_price,
         email: email,
         email_vendedor: email_vendedor,
