@@ -153,6 +153,8 @@ const addToHistorialFB = async (nameComprador, nameResumiter, invitado) => {
     nameResumiter: nameResumiter,
     invitado: invitado,
     date: new Date(),
+    likes: 0,
+    dislikes: 0,
   });
   console.log(docRef.id);
 };
